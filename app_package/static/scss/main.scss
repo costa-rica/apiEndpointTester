@@ -1,0 +1,129 @@
+@use "custom";
+@use "navbar";
+
+
+
+:root {
+  --nav-height: 123px;
+  // --table-chart-width: 100%;
+}
+
+body{
+  background-color: lightgray;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+section.main{
+  padding-top: var(--nav-height);
+  padding-bottom: var(--nav-height);
+  display: flex;
+  justify-content: center;
+}
+
+
+/* Home Page */
+.home_page{
+  width: 90%;
+  padding: 3rem 0 0 0;
+
+  .home_summary_sub{
+    padding-left: 1rem;
+  }
+
+  code { 
+    // background: black;
+    color: var(--bs-gray-200)
+  }
+
+  .code_block{
+    width: 90%;
+    padding-left: 3rem;
+  }
+
+  pre{
+    // background-color: rgb(255, 247, 229);
+    background-color: var(--bs-gray-800);
+    border: 0px solid ;
+    white-space: pre-line;
+    padding: 1rem
+  }
+  .table_custom {
+    // background-color: gray;
+    background-color: var(--bs-gray-300);
+    padding:1rem;
+    border-radius: 1rem;
+    td {
+      // white-space:nowrap;
+      margin:0;
+      padding:0;
+      // width:min-content;
+      // text-align: center;
+      vertical-align: middle;
+    }
+  }
+
+}
+
+
+/* Posts View */
+.posts_view{
+  width: 90%;
+  padding: 3rem 0 0 0;
+  .table_super {
+    // background-color: aqua;
+  }
+  
+  .table_custom {
+    // background-color: gray;
+    background-color: var(--bs-gray-300);
+    padding:1rem;
+    border-radius: 1rem;
+    td {
+      // white-space:nowrap;
+      margin:0;
+      padding:0;
+      // width:min-content;
+      // text-align: center;
+      vertical-align: middle;
+    }
+  }
+  
+  .post_table_super {
+    // width: 50%;
+  }
+  .small_table_custom{
+    // background-color: aqua;
+    table  {
+      // background-color: green;
+      height:.5rem;
+      margin:0;
+      // width:min-content;
+      border-color: var(--bs-gray-500);
+      // .border-color:{
+      //   color:black;
+      // }
+      tr {
+        height: .2rem;
+        // background-color: red;
+      }
+      th {
+        white-space:nowrap;
+        margin:0;
+        padding:0;
+        // width:min-content;
+      }
+      // td {
+      //   // white-space:nowrap;
+      //   margin:0;
+      //   padding:0;
+      //   // width:min-content;
+      // }
+      
+    }
+  }
+}
+
+  
+

@@ -1,0 +1,92 @@
+{% extends "_layout.html" %}
+{% block main %}
+<form method="POST" id="form_1"></form>
+
+<section class="main">
+
+  <div class="home_page">
+
+    <div class="home_summary">
+      <h2>What is this?</h2>
+      <div class="home_summary_sub">
+        <p>This application is an api endpoint for testing sending api calls.</p>
+      </div>
+      
+    </div><!-- home_summary -->
+
+    <div class="home_instructions">
+      <h2>How do I use it?</h2>
+
+      <div class="home_summary_sub">
+
+        <p>Send an API call to https://enpointtester.dashanddata.com</p>
+
+        <p>Here is an example:</p>
+        <div class="code_block">
+  
+          <pre>
+            <code>
+              import requests
+              import json
+      
+              headers = {'password':'rebirth_of_slick','Content-Type': 'application/json'}
+              payload = {'sent_data':'BATMan', 'Other_super_hero':"Dare Devil"}
+              response = requests.post("https://enpointtester.dashanddata.com/posts", headers=headers, data=str(json.dumps(payload)))
+            </code>
+          </pre>
+          
+        </div><!-- code_block -->
+        <p>See the your post here</p>
+
+
+        <div class="table_super post_table_super">
+          <div class="table_custom ">
+            <table id="postsTable" class="display table nowrap responsive">
+              <thead>
+                <tr>
+                  
+                  <th>Date</th>
+                  <th>Sender IP</th>
+                  <th>View</th>
+                  <!-- <th>Delete</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                {% for key, value in posts_dict.items() %}
+                <tr>
+                  <td>{{ value.date_time }}</td>
+                  <td>{{ value.ip_address }}</td>
+                  <td>
+                    <button name="view_{{ key }}" form="form_1" type="submit" value="true" class="btn btn-info">View</button>
+                  </td>
+                  <!-- <td>
+                    <button name="delete_{{ post }}" form="form_1" type="submit" value="true" class="delete_button btn btn-danger">Delete</button>
+                  </td> -->
+                  
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div><!-- post_table_super -->
+
+
+      </div>
+
+    </div><!-- home_instructions -->
+
+  </div><!-- home_page -->
+  
+</section>
+
+
+
+<script type="text/javascript">
+  $(document).ready( function () {
+      $('#postsTable').DataTable();
+  } );
+</script>
+
+
+
+{% endblock %}
