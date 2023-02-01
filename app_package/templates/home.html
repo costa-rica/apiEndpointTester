@@ -19,7 +19,7 @@
 
       <div class="home_summary_sub">
 
-        <p>Send an API call to https://enpointtester.dashanddata.com</p>
+        <p>Send an API call to https://endpointtester.dashanddata.com/posts</p>
 
         <p>Here is an example:</p>
         <div class="code_block">
@@ -31,7 +31,7 @@
       
               headers = {'password':'rebirth_of_slick','Content-Type': 'application/json'}
               payload = {'sent_data':'BATMan', 'Other_super_hero':"Dare Devil"}
-              response = requests.post("https://enpointtester.dashanddata.com/posts", headers=headers, data=str(json.dumps(payload)))
+              response = requests.post("https://endpointtester.dashanddata.com/posts", headers=headers, data=str(json.dumps(payload)))
             </code>
           </pre>
           

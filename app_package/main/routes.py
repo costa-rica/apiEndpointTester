@@ -29,7 +29,6 @@ logger_main.addHandler(stream_handler)
 def home():
     logger_main.info(f"-- in home page route --")
 
-
     # check database dir for posts
     if os.path.exists(os.path.join(current_app.config.get('PROJ_DB_PATH'), 'posts.json')):
         f = open(os.path.join(current_app.config.get('PROJ_DB_PATH'), 'posts.json'))
@@ -41,18 +40,13 @@ def home():
     else:
         posts_dict = {}
 
-    # posts_table_list = list(posts_dict.keys())
-    # posts_keys_formatted_dict = {i:f"{i[:4]}-{i[4:6]}-{i[6:8]} {i[9:11]}:{i[11:13]}_{i[14:16]}" for i in posts_table_list}
     if request.method == "POST":
         formDict = request.form.to_dict()
 
-        print('formDict: ', formDict)
         if "view_" in list(formDict.keys())[0]:
-            print("- Found view -")
-
             view_post = list(formDict.keys())[0][5:]
 
-            return redirect(url_for('main.view_posts', veiw_posts = view_post))
+            return redirect(url_for('main.view_posts', veiw_post = view_post))
 
     return render_template('home.html', posts_dict = posts_dict)
 
@@ -72,10 +66,8 @@ def view_posts():
         posts_dict = {}
 
     posts_table_list = list(posts_dict.keys())
-    # posts_keys_formatted_dict = {i:f"{i[:4]}-{i[4:6]}-{i[6:8]} {i[9:11]}:{i[11:13]}_{i[14:16]}" for i in posts_table_list}
+    view_post=request.args.get('veiw_post')
 
-
-    view_post=request.args.get('view_post')
     if view_post != None:
         print('::: veiw_posts: ', view_post)
         headers_dict = posts_dict[view_post].get('headers')
@@ -91,11 +83,11 @@ def view_posts():
 
     if request.method == "POST":
         formDict = request.form.to_dict()
-        print("formDict: ", formDict)
 
         if "delete_" in list(formDict.keys())[0]:
-            print("- Found delete ! -")
+            logger_main.info(f"-- delete {list(formDict.keys())[0][7:]} --")
             del posts_dict[list(formDict.keys())[0][7:]]
+            
             
             f = open(os.path.join(current_app.config.get('PROJ_DB_PATH'), 'posts.json'), 'w')
             json.dump(posts_dict, f)
@@ -104,11 +96,8 @@ def view_posts():
             return redirect(url_for('main.view_posts'))
         
         if "view_" in list(formDict.keys())[0]:
-            print("- Found view -")
-
+            logger_main.info(f"-- view {list(formDict.keys())[0][5:]} --")
             view_post = list(formDict.keys())[0][5:]
-
-            print(':view_post: ', view_post)
 
             return redirect(url_for('main.view_posts', view_post=view_post))
     return render_template('post.html', posts_dict = posts_dict, headers_dict = headers_dict,
