@@ -66,16 +66,19 @@ def view_posts():
         posts_dict = {}
 
     posts_table_list = list(posts_dict.keys())
-    view_post=request.args.get('veiw_post')
+    view_post=request.args.get('view_post')
+
 
     if view_post != None:
         print('::: veiw_posts: ', view_post)
         headers_dict = posts_dict[view_post].get('headers')
         data_dict = posts_dict[view_post].get('data')
     elif len(posts_table_list) > 0:
+        logger_main.info(f"-- posts_table_list has more than 0 --")
         headers_dict = posts_dict[posts_table_list[0]].get('headers')
         data_dict = posts_dict[posts_table_list[0]].get('data')
     else:
+        logger_main.info(f"-- data dict is empty --")
         headers_dict = {}
         data_dict = {}
 
@@ -101,4 +104,4 @@ def view_posts():
 
             return redirect(url_for('main.view_posts', view_post=view_post))
     return render_template('post.html', posts_dict = posts_dict, headers_dict = headers_dict,
-        data_dict = data_dict)
+        data_dict = data_dict, view_post=view_post)
